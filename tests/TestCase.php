@@ -14,4 +14,17 @@ class TestCase extends OrchestraTestCase {
 	protected function getPackageProviders($app) {
 		return [LELServiceProvider::class];
 	}
-}
+
+	/**
+	 * Setup the test environment.
+	 */
+	public function setUp()
+	{
+	    parent::setUp(); 
+
+	    $this->artisan('vendor:publish', [
+	        '--tag' => 'lel' 
+	    ]);
+
+	}
+} 
