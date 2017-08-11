@@ -1,0 +1,4 @@
+/.idea
+/laravel-easy-log/node_modules
+/laravel-easy-log/vendor
+npm-debug.log
