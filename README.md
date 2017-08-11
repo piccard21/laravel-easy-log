@@ -17,7 +17,7 @@ add in **bootstrap/app.php** just before **return $app;**
 
 ```
 $app->configureMonologUsing(function ($logger) {
-  \Piccard\LaraMySqlLog\LEL::configureMonolog($logger);
+  \Piccard\LEL\LEL::configureMonolog($logger);
 });
 ```
 
