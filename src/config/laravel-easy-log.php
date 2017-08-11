@@ -13,9 +13,9 @@ return [
 		'use_default_connection' => FALSE,
 		'driver' => 'mysql',
 		'host' => 'localhost',
-		'database' => 'testme',
-		'username' => 'root',
-		'password' => 'Startrek,21',
+		'database' => 'DBNAME',
+		'username' => 'DBUSER',
+		'password' => 'DBPASSWORD',
 		'port' => '3306',
 		/*
 		  |--------------------------------------------------------------------------
