@@ -7,7 +7,7 @@
 - add  to **config/app.php**
 
 ```
-Piccard\LaraMySqlLog\LELServiceProvider::class
+Piccard\LEL\LELServiceProvider::class
 ``` 
 
 
