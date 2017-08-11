@@ -104,6 +104,8 @@ class LEL {
 		
 		// MAIL
 		$lel->initMailHandler();
+
+		return $logger;
 	}
 	
 	/**
