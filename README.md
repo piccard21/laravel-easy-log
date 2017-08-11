@@ -23,7 +23,7 @@ $app->configureMonologUsing(function ($logger) {
 
 ## Prepare everything
 ```
-cd packages/piccard/laravel-easy-log/
+cd PACKAGE-INSTALLATION
 ```
 
 ### Install packages
