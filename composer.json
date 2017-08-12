@@ -1,31 +1,28 @@
 {
-  "name": "piccard/laravel-easy-log",
-  "description": "Easy configuration for logging in Laravel",
-  "type": "library",
-  "license": "MIT",
-  "authors": [
-	{
-	  "name": "Andreas Stephan",
-	  "email": "cafe-serendipity21@gmail.com"
-	}
-  ],
-  "require": {
-	"monolog/monolog": "^1.23"
-  },
-  "require-dev": {
-	"orchestra/testbench": "~3.0",
-	"phpunit/phpunit": "^6.0",
-    "fzaninotto/faker": "^1.6"
-  },
-  "autoload-dev": {
-	"psr-4": {
-	  "Piccard\\LEL\\Test\\": "tests/"
-	}
-  },
-  "autoload": {
-	"psr-4": {
-	  "Piccard\\LEL\\": "src/"
-	}
-  }
-
+    "name": "piccard/laravel-easy-log",
+    "description": "Easy configuration for logging in Laravel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [{
+        "name": "Andreas Stephan",
+        "email": "cafe-serendipity21@gmail.com"
+    }],
+    "require": {
+        "monolog/monolog": "^1.23"
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.0",
+        "phpunit/phpunit": "^6.0",
+        "fzaninotto/faker": "^1.6"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Piccard\\LEL\\Test\\": "tests/"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Piccard\\LEL\\": "src/"
+        }
+    }
 }
