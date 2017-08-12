@@ -86,7 +86,7 @@ class LEL {
 
 		// assign server-name to extra
 		$logger->pushProcessor(function ($record) {
-			$record['extra']['server'] = $_SERVER['SERVER_NAME'];
+			$record['extra']['server'] = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '-';
 //            $record['extra']['server'] = gethostname();
 			return $record;
 		});
