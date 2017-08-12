@@ -237,6 +237,7 @@ class LEL {
 
 		$handler->setFormatter($formatter);
 		$logger->pushHandler($handler);
+
 		return $handler;
 	}
 
