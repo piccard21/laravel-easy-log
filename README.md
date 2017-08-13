@@ -2,6 +2,11 @@
 
 ## Installation
 
+```
+composer require cafeserendipity/laravel-easy-log
+``` 
+
+
 ### AddProvider 
 
 - add  to **config/app.php** 
