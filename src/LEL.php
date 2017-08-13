@@ -14,7 +14,7 @@ use Piccard\LEL\MySQLHandler;
 
 /**
  * Class LEL
- * @package cafe-serendipity/lara-mysql-log
+ * @package piccard/lara-mysql-log
  */
 class LEL {
 
@@ -248,14 +248,7 @@ class LEL {
 	 * @param  int $level level from env
 	 */
 	private function initDbHandler($logger, $level = Logger::DEBUG) {
-		// use default-connection
-		if (config('laravel-easy-log.db.use_default_connection')) {
-			$pdo = DB::connection()->getPdo();
-		} // create a custom connection
-		else {
-			$pdo = self::getDbConnection()->getConnection()->getPdo();
-		}
-
+		$pdo = $this->getPdo();
 		$table = config('laravel-easy-log.db.table', 'logs');
 		$columns = config('laravel-easy-log.db.columns');
 		$app = config('laravel-easy-log.db.app');
@@ -269,7 +262,7 @@ class LEL {
 	 *
 	 * @return DbConnectionOnTheFly
 	 */
-	public static function getDbConnection() {
+	public function getDbConnection() {
 		return new DbConnectionOnTheFly([
 			'driver' => config('laravel-easy-log.db.driver', 'mysql'),
 			'host' => config('laravel-easy-log.db.host', 'localhost'),
@@ -278,6 +271,37 @@ class LEL {
 			'username' => config('laravel-easy-log.db.username'),
 			'password' => config('laravel-easy-log.db.password'),
 		]);
+	}
+
+	/**
+	 * get the pdo-connection
+	 *
+	 * @return PDO
+	 */
+	protected function getPdo() {
+		// use default-connection
+		if (config('laravel-easy-log.db.use_default_connection')) {
+			$pdo = DB::connection()->getPdo();
+		} // create a custom connection
+		else {
+			$pdo = $this->getDbConnection()->getConnection()->getPdo();
+		}
+
+		return $pdo;
+	}
+
+	/**
+	 * get the table in which is logged
+	 *
+	 * @return Illuminate\Database\Query\Builder
+	 */
+	public static function getTable() {
+		if (config('laravel-easy-log.db.use_default_connection')) {
+			return DB::table(config('laravel-easy-log.db.table', 'lel'));
+		} else {
+			$lel = self::getInstance();
+			return $lel->getDbConnection()->getTable(config('laravel-easy-log.db.table', 'lel'));
+		}
 	}
 
 }
