@@ -1,19 +1,27 @@
 # laravel-easy-log
 
-[Markdown-Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+## Installation
 
-## Provider
+### AddProvider 
 
-- add  to **config/app.php**
+- add  to **config/app.php** 
 
 ```
 Piccard\LEL\LELServiceProvider::class
 ``` 
+### Publish files
 
+- having the configuration-file, views & controller available in your application, you have to publish them
 
-## Configure Monologe
+```
+php artisan vendor:publish --tag=lel --force
+```
 
-add in **bootstrap/app.php** just before **return $app;**
+### Decide how to log
+
+#### Application-Level
+
+- if you wanna log on application-level, means also laravel is logging through Laravel-Easy-Log add the following to **bootstrap/app.php** just before  **return  $app;** 
 
 ```
 $app->configureMonologUsing(function ($logger) {
@@ -21,75 +29,20 @@ $app->configureMonologUsing(function ($logger) {
 });
 ```
 
-## Prepare everything
+
+#### Custom-Level
+
+- if you don't wanna have Laravel logging through Laravel-Easy-Log, but you wanna do it on your own, you have to create an instance of Laravel-Easy-Log and use this one
+
 ```
-cd PACKAGE-INSTALLATION
-```
-
-### Install packages
-```
-composer install
-npm install
-```
-
-
-### Trigger webpack
-```
-npm run watch
-```
-
-
-### Publish vendor
-```
-cd LARAVEL-INSTALLATION
-php artisan vendor:publish --tag=lel --force
-```
-
-## configure LEL
-
-- in **config/lara-mysql-config.php**
-```
-    'db' => [
-        'logging_enabled' => TRUE,
-        'bubble' => TRUE,
-        'use_default_connection' => FALSE,
-        'host' => 'localhost',
-        'database' => 'testme',
-        'username' => 'root',
-        'password' => '****',
-        'port' => '3306',
-```
-
-
-
-## Test it
-add to **routes/web.php**
-```
-Route::get('/', function () {
-
-    Log::debug("debug");
-    Log::info("info");
-    Log::notice("notice");
-    Log::warning("warning");
-    Log::error("error");
-    Log::critical("critical");
-    Log::alert("alert");
-    Log::emergency("emergency");
-
-    Log::debug("CONTEXT log in DEBUG", array('col1' => 'Hi, I am a context log.'));
-    Log::debug("CONTEXT log in DEBUG", array('col2' => 'Hi, I am a context log.'));
-
-    Log::debug("CONTEXT log in DEBUG", array(
+$logger = \Piccard\LEL\LEL::configureMonolog("channel-name"); 
+$logger->info("Whatever you want to log");
+Log::debug("CONTEXT log in DEBUG", array('col1' => 'Hi, I am a context log.'));    
+Log::debug("CONTEXT log in DEBUG", array(
         'col1' => 'Hi, I am a context log.',
         'col2' => 'Hi, I am a context log.'
     ));
-
-    return view('welcome');
 ```
-});
-
-
-
 
 
 

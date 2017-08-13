@@ -10,7 +10,7 @@ return [
 	'db' => [
 		'logging_enabled' => FALSE,
 		'bubble' => TRUE,
-		'use_default_connection' => FALSE,
+		'use_default_connection' => TRUE,
 		'driver' => 'mysql',
 		'host' => 'localhost',
 		'database' => 'DBNAME',
@@ -21,7 +21,7 @@ return [
 			  |--------------------------------------------------------------------------
 			  | Table
 			  |--------------------------------------------------------------------------
-			  | Define here the name of the table in which should be logged. Also you can specify here some extra columns.
+			  | Define here the name of the table in which should be logged. Also you can specify some extra columns.
 			  | These are the same like you state in the Monolog-context, e.g. you can name additional information you don't wanna integrate into message.
 			  | Hint: When you change the columns, you have to restart the server.
 			  | i.e.:
