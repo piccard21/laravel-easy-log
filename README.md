@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-composer require piccard/laravel-easy-log
+composer require cafe-serendipity/laravel-easy-log
 ``` 
 
 
