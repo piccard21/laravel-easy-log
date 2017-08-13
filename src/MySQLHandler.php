@@ -12,7 +12,7 @@ use PDOStatement;
  * to write records in a MySQL table
  *
  * Class MySQLHandler
- * @package cafeserendipity/lara-mysql-log
+ * @package piccard/lara-mysql-log
  */
 class MySQLHandler extends AbstractProcessingHandler {
 
