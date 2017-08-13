@@ -14,7 +14,7 @@ use Piccard\LEL\MySQLHandler;
 
 /**
  * Class LEL
- * @package cafe-serendipity/lara-mysql-log
+ * @package cafeserendipity/lara-mysql-log
  */
 class LEL {
 
