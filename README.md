@@ -21,7 +21,7 @@ php artisan vendor:publish --tag=lel --force
 
 #### Application-Level
 
-- if you wanna log on application-level, means also laravel is logging through Laravel-Easy-Log add the following to **bootstrap/app.php** just before  **return  $app;** 
+- if you wanna log on application-level, means also laravel is logging through Laravel-Easy-Log, add the following to **bootstrap/app.php** just before  **return  $app;** 
 
 ```
 $app->configureMonologUsing(function ($logger) {
@@ -45,4 +45,16 @@ Log::debug("CONTEXT log in DEBUG", array(
 ```
 
 
+### Configure Laravel-Easy-Log
+Open up **config/laravel-easy-log** and enable the handlers you want to use
+
+#### DB
+
+##### Log-View
+
+#### Files
+
+#### StdOut & StdErr
+
+#### Mail
 
