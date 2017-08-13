@@ -79,9 +79,7 @@ class MigrateDatabaseTest extends TestCase {
 	public function getLogger() {
 		$this->logger = new Logger("lel-test");
 		LEL::configureMonolog($this->logger);
-
 		$this->assertInstanceOf('Monolog\Logger', $this->logger);
-
 		return $this->logger;
 	}
 
