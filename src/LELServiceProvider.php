@@ -12,8 +12,8 @@ class LELServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function boot() {
-		require __DIR__ . '/Http/routes.php';
-		require __DIR__ . '/Http/helpers.php';
+		require_once __DIR__ . '/Http/routes.php';
+		require_once __DIR__ . '/Http/helpers.php';
 
 		// command: vendor:publish
 		$this->publishes([
