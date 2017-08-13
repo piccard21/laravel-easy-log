@@ -1,5 +1,5 @@
 {
-    "name": "cafeserendipity/laravel-easy-log",
+    "name": "piccard/laravel-easy-log",
     "description": "Makes logging easy inside your Laravel-project. Includes handlers for file-, MySql-, StdOut- & StdError- and also Mail-logging.",
     "keywords": ["laravel", "logging", "database", "mysql", "file", "stdout", "stderr", "mail"],
     "type": "library",
