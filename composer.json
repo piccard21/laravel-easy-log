@@ -25,7 +25,5 @@
         "psr-4": {
             "Piccard\\LEL\\": "src/"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    }
 }
