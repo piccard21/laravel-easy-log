@@ -10,7 +10,7 @@ return [
 	'db' => [
 		'logging_enabled' => FALSE,
 		'bubble' => TRUE,
-		'use_default_connection' => TRUE,
+		'use_default_connection' => FALSE,
 		'driver' => 'mysql',
 		'host' => 'localhost',
 		'database' => 'DBNAME',
