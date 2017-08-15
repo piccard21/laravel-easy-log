@@ -30,10 +30,10 @@ class MigrateDatabaseTest extends TestCase {
 		$app['config']->set('laravel-easy-log.db.logging_enabled', true);
 		$app['config']->set('laravel-easy-log.mail.logging_enabled', true);
 		$app['config']->set('laravel-easy-log.db.driver', 'mysql');
-		$app['config']->set('laravel-easy-log.db.database', 'testinger');
-		$app['config']->set('laravel-easy-log.db.username', 'root');
-		$app['config']->set('laravel-easy-log.db.password', 'Startrek,21');
-		$app['config']->set('laravel-easy-log.db.table', 'lel-test');
+		$app['config']->set('laravel-easy-log.db.database', 'DATABASE');
+		$app['config']->set('laravel-easy-log.db.username', 'USER');
+		$app['config']->set('laravel-easy-log.db.password', 'PASSWORD');
+		$app['config']->set('laravel-easy-log.db.table', 'TABLE');
 
 		$this->getLogger();
 	}
