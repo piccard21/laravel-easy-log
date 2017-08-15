@@ -1,29 +1,32 @@
 {
-    "name": "cafe-serendipity/laravel-easy-log",
-    "description": "Makes logging easy inside your Laravel-project. Includes handlers for file-, MySql-, StdOut- & StdError- and also Mail-logging.",
-    "keywords": ["laravel", "logging", "database", "mysql", "file", "stdout", "stderr", "mail"],
-    "type": "library",
-    "license": "MIT",
-    "authors": [{
-        "name": "Andreas Stephan",
-        "email": "cafe-serendipity21@gmail.com"
-    }],
-    "require": {
-        "php": ">=5.6.0",
-        "monolog/monolog": "^1.23"
-    },
-    "require-dev": {
-        "orchestra/testbench": "~3.0",
-        "phpunit/phpunit": "^6.0"
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Piccard\\LEL\\Test\\": "tests/"
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "Piccard\\LEL\\": "src/"
-        }
-    }
+	"name": "cafe-serendipity/laravel-easy-log",
+		"description": "Makes logging easy inside your Laravel-project. Includes handlers for file-, MySql-, stdOut- & stdError- and also mail-logging.",
+		"keywords": ["laravel", "log", "logging", "database", "mysql", "file", "stdout", "stderr", "mail"],
+		"type": "library",
+		"license": "MIT",
+		"authors": [{
+			"name": "Andreas Stephan",
+			"email": "cafe-serendipity21@gmail.com"
+		}],
+		"require": {
+			"php": ">=5.6.0",
+			"monolog/monolog": "^1.23"
+		},
+		"require-dev": {
+			"orchestra/testbench": "~3.0",
+			"phpunit/phpunit": "^6.0"
+		},
+		"autoload-dev": {
+			"psr-4": {
+				"Piccard\\LEL\\Test\\": "tests/"
+			}
+		},
+		"autoload": {
+			"psr-4": {
+				"Piccard\\LEL\\": "src/"
+			}
+		},
+		"scripts": {
+			"test": "phpunit"
+		}
 }
