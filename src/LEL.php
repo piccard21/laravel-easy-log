@@ -17,19 +17,19 @@ use Piccard\LEL\MySQLHandler;
  * @package piccard/lara-mysql-log
  */
 class LEL {
-
+	
 	private static $instance;
 	protected $allLogLevels;
 	protected $logger;
-
+	
 	public static function getInstance() {
-		if (!self::$instance) {
+		if(!self::$instance) {
 			self::$instance = new self();
 		}
-
+		
 		return self::$instance;
 	}
-
+	
 	/**
 	 * Get the value of Logger
 	 *
@@ -38,7 +38,7 @@ class LEL {
 	public function getLogger() {
 		return $this->logger;
 	}
-
+	
 	/**
 	 * Set the value of Logger
 	 *
@@ -48,10 +48,10 @@ class LEL {
 	 */
 	public function setLogger($logger) {
 		$this->logger = $logger;
-
+		
 		return $this;
 	}
-
+	
 	/**
 	 * Get the value of All Log Levels
 	 *
@@ -60,7 +60,7 @@ class LEL {
 	public function getAllLogLevels() {
 		return $this->allLogLevels;
 	}
-
+	
 	/**
 	 * Set the value of All Log Levels
 	 *
@@ -72,7 +72,7 @@ class LEL {
 		$this->allLogLevels = $allLogLevels;
 		return $this;
 	}
-
+	
 	/**
 	 * main entry point for Monolog configuration
 	 *
@@ -83,31 +83,41 @@ class LEL {
 		$lel = self::getInstance();
 		$lel->setLogger($logger);
 		$lel->setAllLogLevels(Logger::getLevels());
-
+		
 		// assign server-name to extra
-		$logger->pushProcessor(function ($record) {
+		$logger->pushProcessor(function($record) {
 			$record['extra']['server'] = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '-';
-//            $record['extra']['server'] = gethostname();
 			return $record;
 		});
-
-		// FILES
-		$lel->initFileHandlers();
-
+		
+		
 		// DB
-		if (config('laravel-easy-log.db.logging_enabled')) {
+		if(config('laravel-easy-log.db.logging_enabled')) {
 			$lel->initDbHandler($logger);
 		}
-
-		// STDOUT / STDERR
-		$lel->initStdHandlers();
-
+		
+		// FILES
+		if(config('laravel-easy-log.file.logging_enabled')) {
+			$lel->initFileHandlers();
+		}
+		
+		// STDOUT
+		if(config('laravel-easy-log.std.out.logging_enabled')) {
+			$lel->initStdHandlers('out');
+		}
+		// STDERR
+		if(config('laravel-easy-log.std.out.logging_enabled')) {
+			$lel->initStdHandlers('err');
+		}
+		
 		// MAIL
-		$lel->initMailHandler();
-
+		if(config('laravel-easy-log.mail.logging_enabled')) {
+			$lel->initMailHandler();
+		}
+		
 		return $logger;
 	}
-
+	
 	/**
 	 * initialize mail-handler
 	 *
@@ -116,51 +126,47 @@ class LEL {
 	private function initMailHandler() {
 		$lel = self::getInstance();
 		$logger = $lel->getLogger();
-
-		if (config('laravel-easy-log.mail.logging_enabled')) {
-			$bubble = config('laravel-easy-log.mail.bubble');
-			$dateFormat = config('laravel-easy-log.mail.date_format');
-			$output = config('laravel-easy-log.mailoutput_format');
-			$level = config('laravel-easy-log.mail.log_level');
-			$from = config('laravel-easy-log.mail.from');
-			$to = config('laravel-easy-log.mail.to');
-			$subject = config('laravel-easy-log.mail.subject');
-			$maxColumnWidth = config('laravel-easy-log.mail.maxColumnWidth');
-
-			// set formatter
-			$formatter = new LineFormatter($output, $dateFormat);
-			$handler = new NativeMailerHandler($to, $subject, $from, $level, $bubble, $maxColumnWidth);
-
-			$handler->setFormatter($formatter);
-			$logger->pushHandler($handler);
-		}
+		
+		$bubble = config('laravel-easy-log.mail.bubble');
+		$dateFormat = config('laravel-easy-log.mail.date_format');
+		$output = config('laravel-easy-log.mailoutput_format');
+		$level = config('laravel-easy-log.mail.log_level');
+		$from = config('laravel-easy-log.mail.from');
+		$to = config('laravel-easy-log.mail.to');
+		$subject = config('laravel-easy-log.mail.subject');
+		$maxColumnWidth = config('laravel-easy-log.mail.maxColumnWidth');
+		
+		// set formatter
+		$formatter = new LineFormatter($output, $dateFormat);
+		$handler = new NativeMailerHandler($to, $subject, $from, $level, $bubble, $maxColumnWidth);
+		
+		$handler->setFormatter($formatter);
+		$logger->pushHandler($handler);
 	}
-
+	
 	/**
 	 * initialize stdout-, stderr-handlers
 	 *
 	 * @return void
 	 */
-	private function initStdHandlers() {
+	private function initStdHandlers($std) {
 		$lel = self::getInstance();
 		$logger = $lel->getLogger();
-
-		foreach (['out', 'err'] as $std) {
-			if (config('laravel-easy-log.std.' . $std . '.logging_enabled')) {
-				$bubble = config('laravel-easy-log.std.' . $std . '.bubble');
-				$dateFormat = config('laravel-easy-log.std.' . $std . '.date_format');
-				$output = config('laravel-easy-log.std.' . $std . '.output_format');
-				$level = config('laravel-easy-log.std.' . $std . '.log_level');
-
-				// set formatter
-				$formatter = new LineFormatter($output, $dateFormat);
-				$handler = new StreamHandler('php://std' . $std, $lel->getLevelInt($level), $bubble);
-				$handler->setFormatter($formatter);
-				$logger->pushHandler($handler);
-			}
+		
+		if(config('laravel-easy-log.std.' . $std . '.logging_enabled')) {
+			$bubble = config('laravel-easy-log.std.' . $std . '.bubble');
+			$dateFormat = config('laravel-easy-log.std.' . $std . '.date_format');
+			$output = config('laravel-easy-log.std.' . $std . '.output_format');
+			$level = config('laravel-easy-log.std.' . $std . '.log_level');
+			
+			// set formatter
+			$formatter = new LineFormatter($output, $dateFormat);
+			$handler = new StreamHandler('php://std' . $std, $lel->getLevelInt($level), $bubble);
+			$handler->setFormatter($formatter);
+			$logger->pushHandler($handler);
 		}
 	}
-
+	
 	/**
 	 * initialize the file-handlers
 	 *
@@ -169,32 +175,23 @@ class LEL {
 	private function initFileHandlers() {
 		$lel = self::getInstance();
 		$logger = $lel->getLogger();
-
-		if (config('laravel-easy-log.file.logging_enabled')) {
-			$bubble = config('laravel-easy-log.file.bubble');
-			$dateFormat = config('laravel-easy-log.file.date_format');
-			$output = config('laravel-easy-log.file.output_format');
-			$logLevels = config('laravel-easy-log.file.log_levels');
-			$logDir = config('laravel-easy-log.file.log_dir');
-			$logDir = rtrim($logDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-		} // default Laravel-Logging
-		else {
-			$bubble = true;
-			$dateFormat = "Y-m-d H:i:s";
-			$output = "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
-			$logLevels = [env('APP_LOG_LEVEL', 'DEBUG')];
-			$logDir = storage_path() . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR;
-		}
-
+		
+		$bubble = config('laravel-easy-log.file.bubble');
+		$dateFormat = config('laravel-easy-log.file.date_format');
+		$output = config('laravel-easy-log.file.output_format');
+		$logLevels = config('laravel-easy-log.file.log_levels');
+		$logDir = config('laravel-easy-log.file.log_dir');
+		$logDir = rtrim($logDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+		
 		// set formatter
 		$formatter = new LineFormatter($output, $dateFormat);
-		foreach ($logLevels as $level) {
+		foreach($logLevels as $level) {
 			$logFile = $logDir . strtolower($level) . '.log';
 			// depends on config('app.log')
 			$lel->setFileHandler($logger, $bubble, $lel->getLevelInt($level), $logFile, $formatter);
 		}
 	}
-
+	
 	/**
 	 * get integer of level
 	 *
@@ -205,7 +202,7 @@ class LEL {
 		$lel = self::getInstance();
 		return $lel->getAllLogLevels()[strtoupper($level)];
 	}
-
+	
 	/**
 	 * set the file-handlers
 	 *
@@ -215,32 +212,32 @@ class LEL {
 	 * @param Formatter $formatter [description]
 	 */
 	private function setFileHandler($logger, $bubble, $level, $logFile, $formatter) {
-		switch (config('app.log')) {
-		case 'single':
-			$handler = new StreamHandler($logFile, $level, $bubble);
-			break;
-
-		case 'daily':
-			$logMaxFiles = (int) config('laravel-easy-log.file.daily.log_max_files');
-			$handler = new RotatingFileHandler($logFile, $logMaxFiles, $level, $bubble);
-			break;
-
-		case 'syslog':
-			$handler = new SyslogHandler(config('laravel-easy-log.file.syslog.ident'), config('laravel-easy-log.file.syslog.facility'), $level, $bubble);
-			break;
-
-		case 'errorlog':
-			// @see  http://de2.php.net/manual/en/function.error-log.php
-			$handler = new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, $level, $bubble);
-			break;
+		switch(config('app.log')) {
+			case 'single':
+				$handler = new StreamHandler($logFile, $level, $bubble);
+				break;
+			
+			case 'daily':
+				$logMaxFiles = (int)config('laravel-easy-log.file.daily.log_max_files');
+				$handler = new RotatingFileHandler($logFile, $logMaxFiles, $level, $bubble);
+				break;
+			
+			case 'syslog':
+				$handler = new SyslogHandler(config('laravel-easy-log.file.syslog.ident'), config('laravel-easy-log.file.syslog.facility'), $level, $bubble);
+				break;
+			
+			case 'errorlog':
+				// @see  http://de2.php.net/manual/en/function.error-log.php
+				$handler = new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, $level, $bubble);
+				break;
 		}
-
+		
 		$handler->setFormatter($formatter);
 		$logger->pushHandler($handler);
-
+		
 		return $handler;
 	}
-
+	
 	/**
 	 * initialize the MySql-Logger
 	 *
@@ -252,11 +249,11 @@ class LEL {
 		$table = config('laravel-easy-log.db.table', 'logs');
 		$columns = config('laravel-easy-log.db.columns');
 		$app = config('laravel-easy-log.db.app');
-
+		
 		$dbHandler = new MySQLHandler($pdo, $table, $level, $app, $columns);
 		$logger->pushHandler($dbHandler);
 	}
-
+	
 	/**
 	 * get a new DBConnection with paramters specified in laravel-easy-log.config
 	 *
@@ -272,7 +269,7 @@ class LEL {
 			'password' => config('laravel-easy-log.db.password'),
 		]);
 	}
-
+	
 	/**
 	 * get the pdo-connection
 	 *
@@ -280,28 +277,28 @@ class LEL {
 	 */
 	protected function getPdo() {
 		// use default-connection
-		if (config('laravel-easy-log.db.use_default_connection')) {
+		if(config('laravel-easy-log.db.use_default_connection')) {
 			$pdo = DB::connection()->getPdo();
 		} // create a custom connection
 		else {
 			$pdo = $this->getDbConnection()->getConnection()->getPdo();
 		}
-
+		
 		return $pdo;
 	}
-
+	
 	/**
 	 * get the table in which is logged
 	 *
 	 * @return Illuminate\Database\Query\Builder
 	 */
 	public static function getTable() {
-		if (config('laravel-easy-log.db.use_default_connection')) {
+		if(config('laravel-easy-log.db.use_default_connection')) {
 			return DB::table(config('laravel-easy-log.db.table', 'lel'));
 		} else {
 			$lel = self::getInstance();
 			return $lel->getDbConnection()->getTable(config('laravel-easy-log.db.table', 'lel'));
 		}
 	}
-
+	
 }
