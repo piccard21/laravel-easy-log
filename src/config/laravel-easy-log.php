@@ -10,6 +10,7 @@ return [
 	'db' => [
 		'logging_enabled' => FALSE,
 		'bubble' => TRUE,
+		'log_level' => 'debug',
 		'use_default_connection' => FALSE,
 		'driver' => 'mysql',
 		'host' => 'localhost',

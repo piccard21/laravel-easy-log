@@ -244,13 +244,14 @@ class LEL {
 	 * @param  Logger $logger Monolog-Logger
 	 * @param  int $level level from env
 	 */
-	private function initDbHandler($logger, $level = Logger::DEBUG) {
+	private function initDbHandler($logger) {
 		$pdo = $this->getPdo();
 		$table = config('laravel-easy-log.db.table', 'logs');
 		$columns = config('laravel-easy-log.db.columns');
 		$app = config('laravel-easy-log.db.app');
+		$level = config('laravel-easy-log.db.log_level');
 		
-		$dbHandler = new MySQLHandler($pdo, $table, $level, $app, $columns);
+		$dbHandler = new MySQLHandler($pdo, $table,  $this->getLevelInt($level), $app, $columns);
 		$logger->pushHandler($dbHandler);
 	}
 	
