@@ -81,7 +81,7 @@ return [
 		  |--------------------------------------------------------------------------
 		  | STD
 		  |--------------------------------------------------------------------------
-		  | if you like you can log to STDOUT & STDERR
+		  | if you like, you can log to STDOUT & STDERR
 	*/
 	'std' => [
 		'out' => [
@@ -103,7 +103,8 @@ return [
 		  |--------------------------------------------------------------------------
 		  | MAIL
 		  |--------------------------------------------------------------------------
-		  | send an email when an error-level is reached. Don't forget to fill out 'to', 'from' & the 'subject'
+		  | send an email when an error-level is reached.
+		  | see http://php.net/manual/en/mail.requirements.php for mail() requirements
 	*/
 	'mail' => [
 		'logging_enabled' => FALSE,

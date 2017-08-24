@@ -207,10 +207,10 @@ class MySQLHandler extends AbstractProcessingHandler {
 				continue;
 			}
 
-			if ($context === null) {
-				unset($contentArray[$key]);
-				unset($this->fields[array_search($key, $this->fields)]);
-			}
+//			if ($context === null) {
+//				unset($contentArray[$key]);
+//				unset($this->fields[array_search($key, $this->fields)]);
+//			}
 		}
 
 		$this->prepareStatement();
