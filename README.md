@@ -60,7 +60,7 @@ $logger->info("CONTEXT log in INFO", array(
 Open up **config/laravel-easy-log** and enable the handlers you want to use. Basically you can use the same options like in [Monolog](https://github.com/Seldaek/monolog).
 
 #### DB
-- **use_default_connection** You can use your default DB-connection your use a custom one. 
+- **use_default_connection** You can use your default DB-connection or define a custom one. 
 - **app** is just another column, if you use different Laravel-applications and the same logging-server, so you can filter them better out. 
 - **table** the table which will be created for logging
 - **columns** define here some extra columns, which you can use when you log, which is similar to Monolog's context logging
