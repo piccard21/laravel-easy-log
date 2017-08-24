@@ -32,6 +32,12 @@ php artisan vendor:publish --tag=lel --force
 $app->configureMonologUsing(function ($logger) {
   \Piccard\LEL\LEL::configureMonolog($logger);
 });
+
+Log::debug("CONTEXT log in DEBUG", array('col1' => 'Hi, I am a context log.'));    
+Log::info("CONTEXT log in INFO", array(
+        'col1' => 'Hi, I am a context log.',
+        'col2' => 'Hi, I am a context log.'
+    ));
 ```
 
 
@@ -42,8 +48,8 @@ $app->configureMonologUsing(function ($logger) {
 ```
 $logger = \Piccard\LEL\LEL::configureMonolog("channel-name"); 
 $logger->info("Whatever you want to log");
-Log::debug("CONTEXT log in DEBUG", array('col1' => 'Hi, I am a context log.'));    
-Log::debug("CONTEXT log in DEBUG", array(
+$logger->debug("CONTEXT log in DEBUG", array('col1' => 'Hi, I am a context log.'));    
+$logger->info("CONTEXT log in INFO", array(
         'col1' => 'Hi, I am a context log.',
         'col2' => 'Hi, I am a context log.'
     ));
@@ -54,8 +60,8 @@ Log::debug("CONTEXT log in DEBUG", array(
 Open up **config/laravel-easy-log** and enable the handlers you want to use. Basically you can use the same options like in [Monolog](https://github.com/Seldaek/monolog).
 
 #### DB
-- *use_default_connection** You can use your default DB-connection your use a custom one. 
-- *app** is just another column, if you use different Laravel-applications and the same logging-server, so you can filter them better out. 
+- **use_default_connection** You can use your default DB-connection your use a custom one. 
+- **app** is just another column, if you use different Laravel-applications and the same logging-server, so you can filter them better out. 
 - **table** the table which will be created for logging
 - **columns** define here some extra columns, which you can use when you log, which is similar to Monolog's context logging
 
