@@ -77,7 +77,7 @@
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-default">Ok</button>
-                        <a href="{{ route('home') }}" class="btn btn-default">Reset</a>
+                        <a href="{{ route('lel') }}" class="btn btn-default">Reset</a>
                     </div>
                 </div>
             </form>
