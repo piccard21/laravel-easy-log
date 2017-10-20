@@ -5,7 +5,7 @@
 </footer>
 
 <!-- Scripts -->
-<script src="{{ asset('vendor/lel/js/tools-layout.js') }}"></script>
+<script src="{{ asset('vendor/lel/js/app.js') }}"></script>
 <!--https://momentjs.com/-->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <!--https://github.com/davidstutz/bootstrap-multiselect-->
