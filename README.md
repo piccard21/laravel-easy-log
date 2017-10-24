@@ -32,7 +32,9 @@ php artisan vendor:publish --tag=lel --force
 $app->configureMonologUsing(function ($logger) {
   \Piccard\LEL\LEL::configureMonolog($logger);
 });
+```
 
+```
 Log::debug("CONTEXT log in DEBUG", array('col1' => 'Hi, I am a context log.'));    
 Log::info("CONTEXT log in INFO", array(
         'col1' => 'Hi, I am a context log.',
@@ -48,6 +50,9 @@ Log::info("CONTEXT log in INFO", array(
 ```
 $logger = \Piccard\LEL\LEL::configureMonolog("channel-name"); 
 $logger->info("Whatever you want to log");
+```
+
+```
 $logger->debug("CONTEXT log in DEBUG", array('col1' => 'Hi, I am a context log.'));    
 $logger->info("CONTEXT log in INFO", array(
         'col1' => 'Hi, I am a context log.',
