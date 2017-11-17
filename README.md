@@ -1,5 +1,7 @@
 # laravel-easy-log
 
+Laravel-Easy-Log helps you to log into differnet files per level or into a MySQL-datatbase, for which you also get a Log-view.
+
 ## Installation
 
 ```
@@ -26,7 +28,7 @@ php artisan vendor:publish --tag=lel --force
 
 #### Application-Level
 
-- if you wanna log on application-level, means also laravel is logging through Laravel-Easy-Log, add the following to **bootstrap/app.php** just before  **return  $app;** 
+- if you wanna log on application-level, means also Laravel is logging through Laravel-Easy-Log, add the following to **bootstrap/app.php** just before  **return  $app;** 
 
 ```
 $app->configureMonologUsing(function ($logger) {
@@ -34,7 +36,13 @@ $app->configureMonologUsing(function ($logger) {
 });
 ```
 
+ - now use it as usual:
+
 ```
+use Illuminate\Support\Facades\Log;
+
+...
+
 Log::debug("CONTEXT log in DEBUG", array('col1' => 'Hi, I am a context log.'));    
 Log::info("CONTEXT log in INFO", array(
         'col1' => 'Hi, I am a context log.',
@@ -45,12 +53,14 @@ Log::info("CONTEXT log in INFO", array(
 
 #### Custom-Level
 
-- if you don't wanna have Laravel logging through Laravel-Easy-Log, but you wanna do it on your own, you have to create an instance of Laravel-Easy-Log and use this one
+- if you don't wanna have Laravel logging through Laravel-Easy-Log, but you wanna do it on your own, you have to create an instance of Laravel-Easy-Log:
 
 ```
 $logger = \Piccard\LEL\LEL::configureMonolog("channel-name"); 
 $logger->info("Whatever you want to log");
 ```
+
+- now use the instance:
 
 ```
 $logger->debug("CONTEXT log in DEBUG", array('col1' => 'Hi, I am a context log.'));    
@@ -80,9 +90,11 @@ To get to the view of your DB-Logs goto the route **/lel**
 #### Files
 - **log_levels** define here which files you want foreach log-level
 
-#### StdOut & StdErr
-- NOT TESTED YET
 
-#### Mail
-- NOT TESTED YET
+## License
 
+busy-load is licensed under the MIT License - see the LICENSE file for details.
+
+
+## Author
+[Andreas Stephan](https://cafe-serendipity.com)
