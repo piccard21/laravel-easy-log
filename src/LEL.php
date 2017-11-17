@@ -88,8 +88,10 @@ class LEL {
 		} else if (is_string($logger)) {
 			$logger = new Logger($logger);
 			$lel->setLogger($logger);
+		} else {
+			$logger = new Logger(env('APP_NAME'));
+			$lel->setLogger($logger);
 		}
-
 		$lel->setAllLogLevels(Logger::getLevels());
 
 		// assign server-name to extra
