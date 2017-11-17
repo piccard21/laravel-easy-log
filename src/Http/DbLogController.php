@@ -89,7 +89,7 @@ class DbLogController extends Controller {
 			'resultNumber' => session()->get('result-number', config('laravel-easy-log.db.view.result-number')),
 			'resultLevel' => session()->get('result-level', [100, 200, 250, 300, 400, 500, 550, 600]),
 			'resultSearchText' => session()->get('result-search-text', null),
-			'resultSearchColumn' => session()->get('result-search-column', ['message']),
+			'resultSearchColumn' => session()->get('result-search-column', [config('laravel-easy-log.db.searchDefault', 'message')]),
 			'resultDaterange' => session()->get('result-daterange', null),
 		];
 	}
