@@ -39,6 +39,7 @@ return [
 		'app' => env('APP_NAME', 'Laravel'),
 		'table' => 'logs',
 		'columns' => ['col1', 'col2'],
+		'searchDefault' => 'message',
 		'view' => [
 			'big' => TRUE,
 			'message_column_width' => '10%',
