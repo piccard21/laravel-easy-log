@@ -11,11 +11,12 @@ composer require cafe-serendipity/laravel-easy-log
 
 ### AddProvider 
 
-- add  to **config/app.php** 
+- add the provider to **config/app.php** 
 
 ```
 Piccard\LEL\LELServiceProvider::class
 ``` 
+
 ### Publish files
 
 - having the configuration-file, views & controller available in your application, you have to publish them
@@ -28,7 +29,7 @@ php artisan vendor:publish --tag=lel --force
 
 #### Application-Level
 
-- if you wanna log on application-level, means also Laravel is logging through Laravel-Easy-Log, add the following to **bootstrap/app.php** just before  **return  $app;** 
+- if you wanna log on application-level, means also Laravel is logging through Laravel-Easy-Log, add the following to **bootstrap/app.php** just before  **return  $app;**. Because Laravel-Easy-Log is logging ow for you, you have to switch on at least file or db in **config/laravel-easy-log.php**
 
 ```
 $app->configureMonologUsing(function ($logger) {
