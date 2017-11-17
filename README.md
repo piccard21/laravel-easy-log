@@ -94,7 +94,7 @@ To get to the view of your DB-Logs goto the route **/lel**
 
 ## License
 
-busy-load is licensed under the MIT License - see the LICENSE file for details.
+**laravel-easy-log** is licensed under the MIT License - see the LICENSE file for details.
 
 
 ## Author
