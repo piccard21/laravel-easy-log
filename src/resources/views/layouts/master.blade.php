@@ -18,7 +18,7 @@
         <link href="{{ asset('vendor/lel/css/app.css') }}" rel="stylesheet">
 
     </head>
-    <body class="site">
+    <body class="lel-body site">
         @include('lel::layouts.navigation')
 
         @if ($flash = session('message'))

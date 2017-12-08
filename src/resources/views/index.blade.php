@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <main class="site-content">
+    <main class="site-content lel-content">
         <div class="{{ getContainerClass() }}">
             <div class="row">
                 <div class="col-xs-12">

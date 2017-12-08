@@ -1,7 +1,7 @@
-<footer class="panel panel-default">
-<div class="panel-body text-right">
-    &copy;2017 <a href="https://cafe-serendipity.com">&nbsp;Cafe-Serendipity</a>
-</div>
+<footer class="panel panel-default lel-footer">
+{{--<div class="panel-body text-right">--}}
+    {{--&copy;2017 <a href="https://cafe-serendipity.com">&nbsp;Cafe-Serendipity</a>--}}
+{{--</div>--}}
 </footer>
 
 <!-- Scripts -->
