@@ -2,7 +2,7 @@
 @if (count($errors) )
 
 <div class="{{ getContainerClass() }}"> 
-    <div class="panel  panel-danger">
+    <div class="panel panel-danger  lel-errors">
         <div class="panel-heading">Errors</div> 
 
         <ul class="list-group"> 

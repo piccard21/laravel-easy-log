@@ -1,5 +1,5 @@
 <div id="app">
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-static-top lel-nav">
         <div class="">
             <div class="navbar-header">
 
